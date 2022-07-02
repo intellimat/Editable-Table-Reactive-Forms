@@ -1,1 +1,50 @@
-<p>users-table works!</p>
+<form [formGroup]="usersTable">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <ng-container
+        formArrayName="tableRows"
+        *ngFor="let group of getFormControls.controls; let i = index"
+      >
+        <tr *ngIf="group.get('isEditable')!.value" [formGroupName]="i">
+          <td>
+            <input type="text" formControlName="name" />
+          </td>
+          <td>
+            <input type="text" formControlName="email" />
+          </td>
+          <td>
+            <select formControlName="department">
+              <option [value]="group.get('department')!.value">
+                {{ group.get("department")!.value }}
+              </option>
+              <ng-container *ngFor="let d of departments">
+                <option *ngIf="d !== group.get('department')!.value">
+                  {{ d }}
+                </option>
+              </ng-container>
+            </select>
+          </td>
+          <td><button>confirm</button> <button>cancel</button></td>
+        </tr>
+        <tr *ngIf="!group.get('isEditable')!.value">
+          <td>
+            {{ group.get("name")!.value }}
+          </td>
+          <td>
+            {{ group.get("email")!.value }}
+          </td>
+          <td>
+            {{ group.get("department")!.value }}
+          </td>
+          <td><button>edit</button> <button>delete</button></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</form>
