@@ -1,1 +1,47 @@
-<p>users-table works!</p>
+<form>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of editableTableData">
+        <tr *ngIf="true">
+          <td>
+            <input type="text" [value]="user.name" />
+          </td>
+          <td>
+            <input type="text" [value]="user.email" />
+          </td>
+          <td>
+            <select>
+              <option [value]="user.department">
+                {{ user.department }}
+              </option>
+              <ng-container *ngFor="let d of departments">
+                <option *ngIf="d !== user.department">
+                  {{ d }}
+                </option>
+              </ng-container>
+            </select>
+          </td>
+          <td><button>confirm</button> <button>cancel</button></td>
+        </tr>
+        <!-- <tr *ngIf="!group.get('isEditable')!.value">
+          <td>
+            {{ group.get("name")!.value }}
+          </td>
+          <td>
+            {{ group.get("email")!.value }}
+          </td>
+          <td>
+            {{ group.get("department")!.value }}
+          </td>
+          <td><button>edit</button> <button>delete</button></td>
+        </tr> -->
+      </ng-container>
+    </tbody>
+  </table>
+</form>

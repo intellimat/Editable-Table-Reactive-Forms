@@ -1,0 +1,23 @@
+table {
+  z-index: 1;
+  font-family: arial, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    border-right: 1px darkgrey solid;
+  }
+
+  td {
+    border-bottom: 1px darkgrey solid;
+  }
+
+  th {
+    background-color: #527a7a;
+    color: white;
+  }
+}

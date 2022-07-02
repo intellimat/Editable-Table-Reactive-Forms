@@ -1,1 +1,12 @@
-<p>users-table-container works!</p>
+<div class="outmost-container">
+  <div class="header">
+    <div class="switch-view">
+      <button>Column view</button>
+      <button>Grid View</button>
+    </div>
+    <div>
+      <button>Add row</button>
+    </div>
+  </div>
+  <app-users-table [data]="data$ | async"></app-users-table>
+</div>
