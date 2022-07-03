@@ -20,4 +20,25 @@ table {
     background-color: #527a7a;
     color: white;
   }
+
+  tr {
+    td:last-of-type {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .department-dropdown {
+    background: white;
+    border-width: 1px;
+    border-radius: 2px;
+  }
+
+  .action-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
 }

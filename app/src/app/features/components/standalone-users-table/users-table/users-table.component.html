@@ -19,7 +19,7 @@
             <input type="text" formControlName="email" />
           </td>
           <td>
-            <select formControlName="department">
+            <select class="department-dropdown" formControlName="department">
               <option [value]="group.get('department')!.value">
                 {{ group.get("department")!.value }}
               </option>
@@ -31,8 +31,19 @@
             </select>
           </td>
           <td>
-            <button>confirm</button>
-            <button (click)="setUserIsEditable(group, false)">cancel</button>
+            <button class="action-button confirm-button">
+              <img
+                src="assets/icons/check-mark.svg"
+                height="16px"
+                alt="confirm"
+              />
+            </button>
+            <button
+              class="action-button cancel-button"
+              (click)="setUserIsEditable(group, false)"
+            >
+              <img src="assets/icons/x-symbol.svg" height="16px" alt="cancel" />
+            </button>
           </td>
         </tr>
         <tr *ngIf="!group.get('isEditable')!.value">
@@ -46,8 +57,23 @@
             {{ group.get("department")!.value }}
           </td>
           <td>
-            <button (click)="setUserIsEditable(group, true)">edit</button>
-            <button>delete</button>
+            <button
+              class="action-button"
+              (click)="setUserIsEditable(group, true)"
+            >
+              <img
+                src="assets/icons/pencil-edit.svg"
+                height="16px"
+                alt="edit"
+              />
+            </button>
+            <button class="action-button">
+              <img
+                src="assets/icons/delete-bin.svg"
+                height="16px"
+                alt="delete"
+              />
+            </button>
           </td>
         </tr>
       </ng-container>
