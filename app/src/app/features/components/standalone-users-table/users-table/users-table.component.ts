@@ -1,5 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Department, User } from 'src/app/models/user.model';
 
 @Component({
@@ -8,7 +14,7 @@ import { Department, User } from 'src/app/models/user.model';
   styleUrls: ['./users-table.component.scss'],
 })
 export class UsersTableComponent implements OnChanges {
-  @Input() data!: User[] | null;
+  @Input() data: User[] | null = null;
   departments = Object.values(Department);
   usersTable = this.formBuilder.group({
     tableRows: this.formBuilder.array([]),
@@ -18,12 +24,14 @@ export class UsersTableComponent implements OnChanges {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnChanges() {
-    this.usersTable = this.formBuilder.group({
-      tableRows: this.formBuilder.array([]),
-    });
-    this.data?.forEach((user) => {
-      this.addRow(user);
-    });
+    if (this.data) {
+      this.usersTable = this.formBuilder.group({
+        tableRows: this.formBuilder.array([]),
+      });
+      this.data.forEach((user) => {
+        this.addRow(user);
+      });
+    }
   }
 
   private createFormGroup(user: User): FormGroup {
@@ -31,7 +39,7 @@ export class UsersTableComponent implements OnChanges {
       name: [user.name, Validators.required],
       email: [user.email, [Validators.email, Validators.required]],
       department: [user.department, [Validators.required]],
-      isEditable: [true],
+      isEditable: [false],
     });
   }
 
@@ -46,7 +54,7 @@ export class UsersTableComponent implements OnChanges {
     tableRows.removeAt(index);
   }
 
-  private setIsEditable(group: FormGroup, value: boolean) {
+  setUserIsEditable(group: AbstractControl<any, any>, value: boolean) {
     group.get('isEditable')!.setValue(value);
   }
 

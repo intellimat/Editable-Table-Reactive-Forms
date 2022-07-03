@@ -30,7 +30,10 @@
               </ng-container>
             </select>
           </td>
-          <td><button>confirm</button> <button>cancel</button></td>
+          <td>
+            <button>confirm</button>
+            <button (click)="setUserIsEditable(group, false)">cancel</button>
+          </td>
         </tr>
         <tr *ngIf="!group.get('isEditable')!.value">
           <td>
@@ -42,7 +45,10 @@
           <td>
             {{ group.get("department")!.value }}
           </td>
-          <td><button>edit</button> <button>delete</button></td>
+          <td>
+            <button (click)="setUserIsEditable(group, true)">edit</button>
+            <button>delete</button>
+          </td>
         </tr>
       </ng-container>
     </tbody>
