@@ -9,11 +9,11 @@ import {
 import { Department, User } from 'src/app/models/user.model';
 
 @Component({
-  selector: 'app-users-table',
-  templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.scss'],
+  selector: 'app-users-table-view',
+  templateUrl: './users-table-view.component.html',
+  styleUrls: ['./users-table-view.component.scss'],
 })
-export class UsersTableComponent implements OnChanges {
+export class UsersTableViewComponent implements OnChanges {
   @Input() data: User[] | null = null;
   departments = Object.values(Department);
   usersTable = this.formBuilder.group({

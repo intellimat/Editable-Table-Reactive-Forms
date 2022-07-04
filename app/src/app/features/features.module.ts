@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersTableComponent } from './components/standalone-users-table/users-table/users-table.component';
-import { UsersTableContainerComponent } from './components/standalone-users-table/users-table-container/users-table-container.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { UsersModule } from './users/users.module';
+import { UsersViewComponent } from './users/components/users-view/users-view.component';
 
 @NgModule({
-  declarations: [UsersTableComponent, UsersTableContainerComponent],
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
-  exports: [UsersTableContainerComponent],
+  imports: [CommonModule, UsersModule],
+  exports: [UsersViewComponent],
 })
 export class FeaturesModule {}
