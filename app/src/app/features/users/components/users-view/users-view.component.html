@@ -1,12 +1,30 @@
 <div class="outmost-container">
   <div class="header">
     <div class="switch-view">
-      <button>Column view</button>
-      <button>Grid View</button>
+      <button
+        [ngClass]="view === 'column' ? 'active' : 'inactive'"
+        (click)="view = 'column'"
+      >
+        Column view
+      </button>
+      <button
+        [ngClass]="view === 'grid' ? 'active' : 'inactive'"
+        (click)="view = 'grid'"
+      >
+        Grid View
+      </button>
     </div>
     <div>
-      <button>Add row</button>
+      <button class="add-row">Add row</button>
     </div>
   </div>
-  <app-users-table-view [data]="data$ | async"></app-users-table-view>
+  <app-users-table-view
+    *ngIf="view === 'grid'"
+    [data]="data$ | async"
+  ></app-users-table-view>
+  <app-users-column-view
+    *ngIf="view === 'column'"
+    [data]="data$ | async"
+    [eventEmitter]="eventEmitter"
+  ></app-users-column-view>
 </div>

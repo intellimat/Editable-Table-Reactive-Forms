@@ -1,0 +1,11 @@
+@import "./colors.scss";
+$button-border-radius-value: 25px;
+$button-padding: 10px 20px;
+
+.active {
+  background-color: $primary-green;
+}
+
+.inactive {
+  background-color: $primary-grey;
+}
