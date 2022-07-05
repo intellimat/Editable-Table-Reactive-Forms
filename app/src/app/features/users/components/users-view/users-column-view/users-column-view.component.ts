@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { TableEvent, OutcomeEvent } from '../events';
 
 @Component({
   selector: 'app-users-column-view',
@@ -8,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class UsersColumnViewComponent implements OnInit {
   @Input() data: User[] | null = null;
-  @Input() eventEmitter: EventEmitter<any> | undefined;
+
   constructor() {}
 
   ngOnInit(): void {}

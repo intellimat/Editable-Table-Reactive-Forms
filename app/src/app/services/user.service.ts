@@ -14,22 +14,22 @@ export class UserService {
     return this.http.get<User[]>(apiBaseUrl + userUrl);
   }
 
-  postUser(userId: number, body: User): Observable<User> {
-    return this.http.post<User>(apiBaseUrl + userUrl + '/' + userId, body);
+  postUser(user: User): Observable<User> {
+    return this.http.post<User>(apiBaseUrl + userUrl + '/' + user.id, user);
   }
 
   deleteUser(userId: number): Observable<{}> {
     return this.http.delete(apiBaseUrl + userUrl + '/' + userId);
   }
 
-  patchUser(userId: number, body: Partial<User>): Observable<User> {
-    return this.http.patch<User>(apiBaseUrl + userUrl + '/' + userId, body);
+  patchUser(user: Partial<User>): Observable<User> {
+    return this.http.patch<User>(apiBaseUrl + userUrl + '/' + user.id, user);
   }
 
-  putUser(userId: number, body: Partial<User>): Observable<Partial<User>> {
+  putUser(user: Partial<User>): Observable<Partial<User>> {
     return this.http.put<Partial<User>>(
-      apiBaseUrl + userUrl + '/' + userId,
-      body
+      apiBaseUrl + userUrl + '/' + user.id,
+      user
     );
   }
 }

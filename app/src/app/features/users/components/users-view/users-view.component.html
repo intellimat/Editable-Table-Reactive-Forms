@@ -15,16 +15,17 @@
       </button>
     </div>
     <div>
-      <button class="add-row">Add row</button>
+      <button class="add-row" (click)="onAddRowClick()">Add row</button>
     </div>
   </div>
   <app-users-table-view
     *ngIf="view === 'grid'"
     [data]="data$ | async"
+    [outcomeEventEE]="outcomeEventEE"
+    (tableEventEE)="handleTableEvent($event)"
   ></app-users-table-view>
   <app-users-column-view
     *ngIf="view === 'column'"
     [data]="data$ | async"
-    [eventEmitter]="eventEmitter"
   ></app-users-column-view>
 </div>

@@ -31,7 +31,10 @@
             </select>
           </td>
           <td>
-            <button class="action-button confirm-button">
+            <button
+              class="action-button confirm-button"
+              (click)="onConfirmEdit(group)"
+            >
               <img
                 src="assets/icons/check-mark.svg"
                 height="16px"
