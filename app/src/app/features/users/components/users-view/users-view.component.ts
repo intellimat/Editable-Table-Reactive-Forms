@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { TableEvent, TableEventType, UpdateTableResponse } from './events';
@@ -12,6 +12,7 @@ export class UsersViewComponent implements OnInit {
   view: 'column' | 'grid' = 'grid';
   data$ = this.userService.getUsers();
   updateTableResponseEE = new EventEmitter<UpdateTableResponse>();
+  dialogOpen = false;
 
   constructor(private userService: UserService) {}
 
@@ -78,7 +79,10 @@ export class UsersViewComponent implements OnInit {
   }
 
   onAddRowClick() {
-    console.log('Add row clicked');
-    // open popup
+    this.dialogOpen = true;
+  }
+
+  showDialog(dialogOpen: boolean) {
+    this.dialogOpen = dialogOpen;
   }
 }

@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module';
 import { InfoDialogComponent } from './shared/info-dialog/info-dialog.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, InfoDialogComponent],
-  imports: [BrowserModule, FeaturesModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, FeaturesModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -28,4 +28,8 @@
     *ngIf="view === 'column'"
     [data]="data$ | async"
   ></app-users-column-view>
+  <app-info-dialog
+    *ngIf="dialogOpen"
+    (showDialogEE)="showDialog($event)"
+  ></app-info-dialog>
 </div>
