@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module';
-import { InfoDialogComponent } from './shared/info-dialog/info-dialog.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({

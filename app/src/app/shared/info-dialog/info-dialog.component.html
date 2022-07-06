@@ -2,7 +2,30 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <button (click)="onCloseButtonClick()" class="close">&times;</button>
-    <p>Some text in the Modal..</p>
+    <div class="modal-title">
+      <span>{{ data.type === DialogTypeSave ? "Add row" : "Remove row" }}</span>
+    </div>
+    <div class="fields-section">
+      <ng-container *ngIf="data.type === DialogTypeSave">
+        <div *ngFor=""></div>
+      </ng-container>
+    </div>
+    <div class="bottom-section">
+      <button
+        class="custom-button secondary-button"
+        (click)="onCancelButtonClick()"
+      >
+        <span> cancel </span>
+      </button>
+      <button
+        [ngClass]="
+          data.type === DialogTypeSave ? 'save-button' : 'warning-button'
+        "
+        class="custom-button"
+        (click)="onConfirmButtonClick()"
+      >
+        <span> {{ data.type === DialogTypeSave ? "save" : "remove" }}</span>
+      </button>
+    </div>
   </div>
 </div>

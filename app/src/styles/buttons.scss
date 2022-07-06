@@ -9,3 +9,26 @@ $button-padding: 10px 20px;
 .inactive {
   background-color: $primary-grey;
 }
+
+.custom-button {
+  cursor: pointer;
+  border: none;
+  border-radius: $button-border-radius-value;
+  padding: $button-padding;
+  text-transform: uppercase;
+}
+
+.warning-button {
+  background-color: darkred;
+  color: white;
+}
+
+.save-button {
+  background-color: darkgreen;
+  color: white;
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: black;
+}

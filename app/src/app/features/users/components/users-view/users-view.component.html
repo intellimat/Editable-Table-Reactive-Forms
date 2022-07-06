@@ -29,7 +29,10 @@
     [data]="data$ | async"
   ></app-users-column-view>
   <app-info-dialog
-    *ngIf="dialogOpen"
-    (showDialogEE)="showDialog($event)"
+    *ngIf="dialog.open"
+    [data]="dialog.data"
+    (changesSavedEE)="onChangesSaved($event)"
+    (removedRowEE)="onRemovedRow()"
+    (hideDialogEE)="onHideDialog()"
   ></app-info-dialog>
 </div>
