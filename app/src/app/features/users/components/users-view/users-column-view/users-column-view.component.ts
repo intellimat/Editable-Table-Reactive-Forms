@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import { TableEvent, OutcomeEvent } from '../events';
 
 @Component({
   selector: 'app-users-column-view',

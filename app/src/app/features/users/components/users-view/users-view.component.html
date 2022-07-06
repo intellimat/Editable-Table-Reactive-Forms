@@ -21,7 +21,7 @@
   <app-users-table-view
     *ngIf="view === 'grid'"
     [data]="data$ | async"
-    [outcomeEventEE]="outcomeEventEE"
+    [updateTableResponseEE]="updateTableResponseEE"
     (tableEventEE)="handleTableEvent($event)"
   ></app-users-table-view>
   <app-users-column-view

@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Department, User } from 'src/app/models/user.model';
-import { EventType, TableEvent as TableEvent, OutcomeEvent } from '../events';
+import { TableEvent, TableEventType, UpdateTableResponse } from '../events';
 
 @Component({
   selector: 'app-users-table-view',
@@ -23,7 +23,7 @@ import { EventType, TableEvent as TableEvent, OutcomeEvent } from '../events';
 })
 export class UsersTableViewComponent implements OnInit, OnChanges {
   @Input() data: User[] | null = null;
-  @Input() outcomeEventEE!: EventEmitter<OutcomeEvent>;
+  @Input() updateTableResponseEE!: EventEmitter<UpdateTableResponse>;
   @Output() tableEventEE = new EventEmitter<TableEvent>();
 
   departments = Object.values(Department);
@@ -78,47 +78,55 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     console.log(this.usersTable.value);
   }
 
-  onConfirmEdit(group: AbstractControl<any, any>) {
+  onConfirmEdit(group: AbstractControl<any, any>, rowIndex: number) {
     const user = group.value;
-    const event: OutcomeEvent = {
+    const event: TableEvent = {
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
         department: user.department,
-        created: new Date().toISOString(),
       },
-      type: EventType.EditRow,
-      success: false,
+      type: TableEventType.EditRow,
+      rowIndex,
+    };
+    this.tableEventEE.emit(event);
+  }
+
+  onDeleteClick(group: AbstractControl<any, any>, rowIndex: number) {
+    const user = group.value;
+    const event: TableEvent = {
+      user: { id: user.id },
+      type: TableEventType.DeleteRow,
+      rowIndex,
     };
     this.tableEventEE.emit(event);
   }
 
   private handleOutcomeEvents() {
-    this.outcomeEventEE.subscribe((event) => {
-      if (!event.success) {
-        this.handleErrorEvent(event);
+    this.updateTableResponseEE.subscribe((response) => {
+      if (!response.success) {
+        this.handleErrorEvent(response);
         return;
       }
-      if (event.type === EventType.AddRow) {
-        console.log('add user to table');
-        // add row
-        return;
-      }
-      if (event.type === EventType.EditRow) {
-        console.log('edit row');
-        // edit row
-        return;
-      }
-      if (event.type === EventType.DeleteRow) {
-        console.log('delete row successfully');
-        // delete row
-        return;
-      }
+      // if (event.type === EventType.AddRow) {
+      //   console.log('add user to table');
+      //   // add row
+      //   return;
+      // }
+      // if (event.type === EventType.EditRow) {
+      //   console.log('edit row');
+      //   // edit row
+      //   return;
+      // }
+      // if (event.type === EventType.DeleteRow) {
+      //   this.deleteRow(event.rowIndex!);
+      //   return;
+      // }
     });
   }
 
-  private handleErrorEvent(event: OutcomeEvent) {
+  private handleErrorEvent(event: UpdateTableResponse) {
     alert('Error occurred: ' + event);
   }
 

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { EventType, TableEvent, OutcomeEvent } from './events';
+import { TableEvent, TableEventType, UpdateTableResponse } from './events';
 
 @Component({
   selector: 'app-users-view',
@@ -11,42 +11,46 @@ import { EventType, TableEvent, OutcomeEvent } from './events';
 export class UsersViewComponent implements OnInit {
   view: 'column' | 'grid' = 'grid';
   data$ = this.userService.getUsers();
-  outcomeEventEE = new EventEmitter<OutcomeEvent>();
+  updateTableResponseEE = new EventEmitter<UpdateTableResponse>();
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
   handleTableEvent(event: TableEvent) {
-    if (event.type === EventType.EditRow) {
+    if (event.type === TableEventType.EditRow) {
       this.userService.patchUser(event.user).subscribe({
         next: () =>
-          this.outcomeEventEE.emit({
+          this.updateTableResponseEE.emit({
             user: event.user,
             type: event.type,
+            rowIndex: event.rowIndex,
             success: true,
           }),
         error: () =>
-          this.outcomeEventEE.emit({
+          this.updateTableResponseEE.emit({
             user: event.user,
             type: event.type,
+            rowIndex: event.rowIndex,
             success: false,
           }),
       });
       return;
     }
-    if (event.type === EventType.DeleteRow) {
-      this.userService.deleteUser(event.user.id).subscribe({
+    if (event.type === TableEventType.DeleteRow) {
+      this.userService.deleteUser(event.user.id!).subscribe({
         next: () =>
-          this.outcomeEventEE.emit({
+          this.updateTableResponseEE.emit({
             user: event.user,
             type: event.type,
+            rowIndex: event.rowIndex,
             success: true,
           }),
         error: () =>
-          this.outcomeEventEE.emit({
+          this.updateTableResponseEE.emit({
             user: event.user,
             type: event.type,
+            rowIndex: event.rowIndex,
             success: false,
           }),
       });
@@ -57,16 +61,16 @@ export class UsersViewComponent implements OnInit {
   private addUser(user: User) {
     this.userService.postUser(user).subscribe({
       next: () => {
-        this.outcomeEventEE.emit({
+        this.updateTableResponseEE.emit({
           user,
-          type: EventType.AddRow,
+          type: TableEventType.AddRow,
           success: true,
         });
       },
       error: () => {
-        this.outcomeEventEE.emit({
+        this.updateTableResponseEE.emit({
           user,
-          type: EventType.AddRow,
+          type: TableEventType.AddRow,
           success: false,
         });
       },

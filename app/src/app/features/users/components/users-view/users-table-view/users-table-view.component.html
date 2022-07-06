@@ -33,7 +33,7 @@
           <td>
             <button
               class="action-button confirm-button"
-              (click)="onConfirmEdit(group)"
+              (click)="onConfirmEdit(group, i)"
             >
               <img
                 src="assets/icons/check-mark.svg"
@@ -70,7 +70,7 @@
                 alt="edit"
               />
             </button>
-            <button class="action-button">
+            <button class="action-button" (click)="onDeleteClick(group, i)">
               <img
                 src="assets/icons/delete-bin.svg"
                 height="16px"
