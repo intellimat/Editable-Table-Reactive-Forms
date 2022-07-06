@@ -23,13 +23,13 @@ describe('UsersTableViewComponent', () => {
     testHostFixture.detectChanges();
   });
 
-  it('should show TEST INPUT', () => {
+  it('should show form', () => {
     expect(testHostFixture.nativeElement.querySelector('form')).toBeTruthy();
   });
 
   @Component({
     selector: `host-component`,
-    template: ` <app-users-table-view
+    template: `<app-users-table-view
       [data]="data$ | async"
       [updateTableResponseEE]="updateTableResponseEE"
     ></app-users-table-view>`,
