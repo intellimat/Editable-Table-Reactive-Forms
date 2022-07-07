@@ -1,7 +1,7 @@
 import { User } from 'src/app/models/user.model';
 
 export interface TableEvent {
-  user: Partial<User>;
+  user: User;
   type: TableEventType;
   rowIndex?: number;
 }

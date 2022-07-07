@@ -32,7 +32,7 @@
     *ngIf="dialog.open"
     [data]="dialog.data"
     (changesSavedEE)="onChangesSaved($event)"
-    (removedRowEE)="onRemovedRow()"
+    (removedRowEE)="onRemovedRow($event)"
     (hideDialogEE)="onHideDialog()"
   ></app-info-dialog>
 </div>

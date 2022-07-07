@@ -13,6 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { EventType } from '@angular/router';
 import { Department, User } from 'src/app/models/user.model';
 import { TableEvent, TableEventType, UpdateTableResponse } from '../events';
 
@@ -81,12 +82,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
   onConfirmEdit(group: AbstractControl<any, any>, rowIndex: number) {
     const user = group.value;
     const event: TableEvent = {
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        department: user.department,
-      },
+      user,
       type: TableEventType.EditRow,
       rowIndex,
     };
@@ -96,7 +92,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
   onDeleteClick(group: AbstractControl<any, any>, rowIndex: number) {
     const user = group.value;
     const event: TableEvent = {
-      user: { id: user.id },
+      user,
       type: TableEventType.DeleteRow,
       rowIndex,
     };
@@ -119,10 +115,10 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
       //   // edit row
       //   return;
       // }
-      // if (event.type === EventType.DeleteRow) {
-      //   this.deleteRow(event.rowIndex!);
-      //   return;
-      // }
+      if (response.type === TableEventType.DeleteRow) {
+        this.deleteRow(response.rowIndex!);
+        return;
+      }
     });
   }
 

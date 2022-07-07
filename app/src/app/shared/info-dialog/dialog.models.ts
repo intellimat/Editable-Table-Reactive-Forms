@@ -20,7 +20,7 @@ import { User } from 'src/app/models/user.model';
 // }
 
 export interface DialogData {
-  user?: Partial<User>;
+  user?: User;
   type: DialogType;
   rowIndex?: number;
 }
