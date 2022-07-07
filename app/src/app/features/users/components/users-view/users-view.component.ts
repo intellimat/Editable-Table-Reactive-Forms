@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import {
@@ -16,15 +16,18 @@ export class UsersViewComponent {
   view: 'column' | 'grid' = 'grid';
   data$ = this.userService.getUsers();
   updateTableResponseEE = new EventEmitter<UpdateTableResponse>();
-  dialog = {
-    open: false,
-    data: {
-      user: {} as User,
-      type: DialogType.Remove, // initial value, will be changed
-    } as DialogData,
-  };
-
+  dialog = this.initializeDialog();
   constructor(private userService: UserService) {}
+
+  private initializeDialog() {
+    return {
+      open: false,
+      data: {
+        user: {} as User,
+        type: DialogType.Remove, // initial value, will be changed
+      } as DialogData,
+    };
+  }
 
   private showDialog() {
     this.dialog.open = true;
@@ -104,21 +107,24 @@ export class UsersViewComponent {
 
   onAddRowClick() {
     this.dialog.data.type = DialogType.Save;
-    this.dialog.open = true;
+    this.showDialog();
   }
 
   // ----- On events from event emitters -----
   onRemovedRow(event: { user: User; rowIndex: number }) {
     this.deleteUser(event.user, event.rowIndex);
+    this.dialog = this.initializeDialog();
     this.hideDialog();
   }
 
   onChangesSaved(user: User) {
     this.addUser(user);
+    this.dialog = this.initializeDialog();
     this.hideDialog();
   }
 
   onHideDialog() {
-    this.dialog.open = false;
+    this.dialog = this.initializeDialog();
+    this.hideDialog();
   }
 }

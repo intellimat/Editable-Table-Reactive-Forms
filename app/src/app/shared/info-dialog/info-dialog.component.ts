@@ -37,18 +37,19 @@ export class InfoDialogComponent implements OnChanges {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnChanges(): void {
-    if (this.data && this.data.user) {
-      this.form = new FormGroup({
-        name: new FormControl(this.data.user?.name, Validators.required),
-        email: new FormControl(this.data.user?.email, Validators.required),
-        department: new FormControl(
-          this.data.user?.department,
-          Validators.required
-        ),
-      });
-
-      console.log(this.form.get('department')?.value);
-    }
+    if (!this.data || !this.data.user) return;
+    this.form = new FormGroup({
+      name: new FormControl(this.data.user?.name, Validators.required),
+      email: new FormControl(this.data.user?.email, [
+        Validators.required,
+        Validators.email,
+      ]),
+      department: new FormControl(
+        this.data.user?.department,
+        Validators.required
+      ),
+    });
+    if (this.data.type === DialogType.Remove) this.form.disable();
   }
 
   onCancelButtonClick() {

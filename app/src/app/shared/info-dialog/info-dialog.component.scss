@@ -15,20 +15,31 @@
 
 /* Modal Content */
 .modal-content {
+  border-radius: 6px;
   background-color: #fefefe;
   margin: auto;
   padding-top: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
 
   .fields-section,
   .modal-title {
     color: $medium-grey;
     margin-left: 10px;
-    padding: 20px;
+  }
+
+  .modal-title {
+    padding: 20px 20px 0px 20px;
+    font-size: 20px;
+  }
+
+  .fields-section {
+    padding: 0 20px 20px 20px;
   }
 
   .bottom-section {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
     margin-top: 15px;
     text-align: end;
     background-color: #e9edef;
@@ -40,6 +51,18 @@
   form p {
     display: flex;
     flex-direction: column;
+    input,
+    select {
+      height: 30px;
+      margin-top: 5px;
+      &:disabled {
+        background-color: rgb(230, 237, 243);
+        border: none;
+      }
+    }
+    label {
+      font-weight: bold;
+    }
   }
 }
 

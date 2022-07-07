@@ -32,3 +32,9 @@ $button-padding: 10px 20px;
   background-color: transparent;
   color: #636262;
 }
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: lightgrey;
+  color: darkgrey;
+}

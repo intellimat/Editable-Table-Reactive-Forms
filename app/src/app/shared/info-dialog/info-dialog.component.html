@@ -11,30 +11,27 @@
       </ng-container> -->
       <form [formGroup]="form">
         <p>
-          <label>Name</label>
-          <input type="text" formControlName="name" />
+          <label for="name">Name</label>
+          <input type="text" name="name" formControlName="name" />
         </p>
         <p>
-          <label>E-mail</label>
-          <input type="text" formControlName="email" />
+          <label for="email">E-mail</label>
+          <input type="text" name="email" formControlName="email" />
         </p>
         <p>
           <label for="department">Department</label>
-          <select name="department" type="text" formControlName="department">
-            <option [value]="this.form.get('department')?.value">
-              {{ this.form.get("department")?.value }}
-            </option>
-            <ng-container *ngFor="let d of departments">
-              <option
-                *ngIf="d !== this.form.get('department')!.value"
-                [value]="this.form.get('department')?.value"
-              >
+          <ng-container *ngIf="data.type === DialogTypeRemove">
+            <input name="department" type="text" formControlName="department" />
+          </ng-container>
+
+          <ng-container *ngIf="data.type === DialogTypeSave">
+            <select name="department" formControlName="department">
+              <option *ngFor="let d of departments" [value]="d">
                 {{ d }}
               </option>
-            </ng-container>
-          </select>
+            </select>
+          </ng-container>
         </p>
-        <!-- form.valid -->
       </form>
     </div>
     <div class="bottom-section">
@@ -50,6 +47,7 @@
         "
         class="custom-button"
         (click)="onConfirmButtonClick()"
+        [disabled]="data.type === DialogTypeSave ? !form.valid : false"
       >
         <span> {{ data.type === DialogTypeSave ? "save" : "remove" }}</span>
       </button>
