@@ -13,7 +13,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { EventType } from '@angular/router';
 import { Department, User } from 'src/app/models/user.model';
 import { TableEvent, TableEventType, UpdateTableResponse } from '../events';
 
