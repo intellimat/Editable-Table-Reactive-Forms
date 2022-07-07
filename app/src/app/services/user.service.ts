@@ -15,7 +15,7 @@ export class UserService {
   }
 
   postUser(user: User): Observable<User> {
-    return this.http.post<User>(apiBaseUrl + userUrl + '/' + user.id, user);
+    return this.http.post<User>(apiBaseUrl + userUrl, user);
   }
 
   deleteUser(userId: number): Observable<{}> {

@@ -58,7 +58,9 @@ export class InfoDialogComponent implements OnChanges {
 
   onConfirmButtonClick() {
     if (this.data.type === DialogType.Save) {
-      this.changesSavedEE.emit(this.data.user);
+      const user = this.form.value as User;
+      user.created = new Date().toISOString();
+      this.changesSavedEE.emit(user);
     } else if (this.data.type === DialogType.Remove) {
       this.removedRowEE.emit({
         user: this.data.user,

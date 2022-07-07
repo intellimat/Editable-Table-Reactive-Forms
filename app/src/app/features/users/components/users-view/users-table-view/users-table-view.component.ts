@@ -105,11 +105,10 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
         this.handleErrorEvent(response);
         return;
       }
-      // if (event.type === EventType.AddRow) {
-      //   console.log('add user to table');
-      //   // add row
-      //   return;
-      // }
+      if (response.type === TableEventType.AddRow) {
+        this.addRow(response.user);
+        return;
+      }
       // if (event.type === EventType.EditRow) {
       //   console.log('edit row');
       //   // edit row
