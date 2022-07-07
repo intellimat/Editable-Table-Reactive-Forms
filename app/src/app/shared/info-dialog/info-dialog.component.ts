@@ -11,7 +11,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { User } from 'src/app/models/user.model';
+import { Department, User } from 'src/app/models/user.model';
 import { DialogData, DialogType } from './dialog.models';
 
 @Component({
@@ -26,6 +26,7 @@ export class InfoDialogComponent implements OnChanges {
   @Output() removedRowEE = new EventEmitter();
   DialogTypeSave = DialogType.Save;
   DialogTypeRemove = DialogType.Remove;
+  departments = Object.values(Department);
 
   form = this.formBuilder.group({
     name: new FormControl(),
@@ -45,6 +46,8 @@ export class InfoDialogComponent implements OnChanges {
           Validators.required
         ),
       });
+
+      console.log(this.form.get('department')?.value);
     }
   }
 

@@ -36,6 +36,11 @@
     border-top: 1px solid;
     border-color: #7e7d7d;
   }
+
+  form p {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* The Close Button */

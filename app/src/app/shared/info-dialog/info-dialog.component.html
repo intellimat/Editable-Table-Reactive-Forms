@@ -11,12 +11,28 @@
       </ng-container> -->
       <form [formGroup]="form">
         <p>
-          <label>First Name:</label>
+          <label>Name</label>
           <input type="text" formControlName="name" />
         </p>
         <p>
-          <label>Password:</label>
-          <input type="password" formControlName="email" />
+          <label>E-mail</label>
+          <input type="text" formControlName="email" />
+        </p>
+        <p>
+          <label for="department">Department</label>
+          <select name="department" type="text" formControlName="department">
+            <option [value]="this.form.get('department')?.value">
+              {{ this.form.get("department")?.value }}
+            </option>
+            <ng-container *ngFor="let d of departments">
+              <option
+                *ngIf="d !== this.form.get('department')!.value"
+                [value]="this.form.get('department')?.value"
+              >
+                {{ d }}
+              </option>
+            </ng-container>
+          </select>
         </p>
         <!-- form.valid -->
       </form>
