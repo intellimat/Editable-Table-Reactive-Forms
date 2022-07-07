@@ -37,7 +37,6 @@ export class InfoDialogComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.data && this.data.user) {
-      console.log(this.data);
       this.form = new FormGroup({
         name: new FormControl(this.data.user?.name, Validators.required),
         email: new FormControl(this.data.user?.email, Validators.required),

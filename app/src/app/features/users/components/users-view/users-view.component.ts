@@ -69,7 +69,6 @@ export class UsersViewComponent {
           rowIndex,
           success: false,
         }),
-      complete: this.hideDialog,
     });
   }
 
@@ -97,6 +96,7 @@ export class UsersViewComponent {
     if (event.type === TableEventType.DeleteRow) {
       this.dialog.data.user = event.user;
       this.dialog.data.type = DialogType.Remove;
+      this.dialog.data.rowIndex = event.rowIndex;
       this.showDialog();
       return;
     }
@@ -110,10 +110,12 @@ export class UsersViewComponent {
   // ----- On events from event emitters -----
   onRemovedRow(event: { user: User; rowIndex: number }) {
     this.deleteUser(event.user, event.rowIndex);
+    this.hideDialog();
   }
 
   onChangesSaved(user: User) {
     this.addUser(user);
+    this.hideDialog();
   }
 
   onHideDialog() {
