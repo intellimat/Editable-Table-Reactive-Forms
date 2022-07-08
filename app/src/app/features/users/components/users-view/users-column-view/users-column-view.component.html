@@ -1,1 +1,15 @@
-<p>users-column-view works!</p>
+<div class="outmost-container">
+  <div class="department">
+    <app-department-container
+      title="Marketing"
+      [data]="usersFromMarketing"
+    ></app-department-container>
+  </div>
+
+  <div class="department">
+    <app-department-container
+      title="Development"
+      [data]="usersFromDevelopment"
+    ></app-department-container>
+  </div>
+</div>
