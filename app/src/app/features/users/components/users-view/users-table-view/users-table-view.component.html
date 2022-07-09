@@ -43,7 +43,7 @@
             </button>
             <button
               class="action-button cancel-button"
-              (click)="setUserIsEditable(group, false)"
+              (click)="onCancelClick(group, i)"
             >
               <img src="assets/icons/x-symbol.svg" height="16px" alt="cancel" />
             </button>
@@ -60,10 +60,7 @@
             {{ group.get("department")!.value }}
           </td>
           <td>
-            <button
-              class="action-button"
-              (click)="setUserIsEditable(group, true)"
-            >
+            <button class="action-button" (click)="onEditClick(group, i)">
               <img
                 src="assets/icons/pencil-edit.svg"
                 height="16px"

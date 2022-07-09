@@ -31,6 +31,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     tableRows: this.formBuilder.array([]),
   });
   tableRows = this.usersTable.get('tableRows') as FormArray;
+  valuesBeforeEditing = new Map<number, AbstractControl<any, any>>();
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -74,18 +75,9 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     group.get('isEditable')!.setValue(value);
   }
 
-  saveUserDetails() {
-    console.log(this.usersTable.value);
-  }
-
-  onConfirmEdit(group: AbstractControl<any, any>, rowIndex: number) {
-    const user = group.value;
-    const event: TableEvent = {
-      user,
-      type: TableEventType.EditRow,
-      rowIndex,
-    };
-    this.tableEventEE.emit(event);
+  onEditClick(group: AbstractControl<any, any>, rowIndex: number) {
+    this.valuesBeforeEditing.set(rowIndex, group.getRawValue());
+    this.setUserIsEditable(group, true);
   }
 
   onDeleteClick(group: AbstractControl<any, any>, rowIndex: number) {
@@ -98,6 +90,21 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     this.tableEventEE.emit(event);
   }
 
+  onConfirmEdit(group: AbstractControl<any, any>, rowIndex: number) {
+    const user = group.value;
+    const event: TableEvent = {
+      user,
+      type: TableEventType.EditRow,
+      rowIndex,
+    };
+    this.tableEventEE.emit(event);
+  }
+
+  onCancelClick(group: AbstractControl<any, any>, rowIndex: number) {
+    group.setValue(this.valuesBeforeEditing.get(rowIndex!));
+    this.valuesBeforeEditing.delete(rowIndex);
+  }
+
   private handleOutcomeEvents() {
     this.updateTableResponseEE.subscribe((response) => {
       if (!response.success) {
@@ -108,11 +115,13 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
         this.addRow(response.user);
         return;
       }
-      // if (event.type === EventType.EditRow) {
-      //   console.log('edit row');
-      //   // edit row
-      //   return;
-      // }
+      if (response.type === TableEventType.EditRow) {
+        this.setUserIsEditable(
+          this.getFormControls.at(response.rowIndex!),
+          false
+        );
+        return;
+      }
       if (response.type === TableEventType.DeleteRow) {
         this.deleteRow(response.rowIndex!);
         return;
@@ -121,6 +130,11 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
   }
 
   private handleErrorEvent(event: UpdateTableResponse) {
+    if (event.type === TableEventType.EditRow) {
+      this.getFormControls
+        .at(event.rowIndex!)
+        .setValue(this.valuesBeforeEditing.get(event.rowIndex!));
+    }
     alert('Error occurred: ' + event);
   }
 
