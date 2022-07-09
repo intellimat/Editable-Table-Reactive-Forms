@@ -1,4 +1,8 @@
 @import "../../../../../../styles/styles.scss";
+@mixin highlight-row {
+  background-color: $primary-grey;
+}
+
 table {
   z-index: 1;
   font-family: arial, sans-serif;
@@ -23,9 +27,15 @@ table {
   }
 
   tr {
+    height: 40px;
     td:last-of-type {
       display: flex;
       justify-content: center;
+      height: 40px;
+    }
+
+    &:hover {
+      @include highlight-row;
     }
   }
 
@@ -41,5 +51,9 @@ table {
     border: none;
     margin-left: 4px;
     margin-right: 4px;
+  }
+
+  .selected-row {
+    @include highlight-row;
   }
 }

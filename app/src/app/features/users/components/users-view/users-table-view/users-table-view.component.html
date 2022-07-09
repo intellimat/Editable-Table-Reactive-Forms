@@ -11,7 +11,11 @@
         formArrayName="tableRows"
         *ngFor="let group of getFormControls.controls; let i = index"
       >
-        <tr *ngIf="group.get('isEditable')!.value" [formGroupName]="i">
+        <tr
+          *ngIf="group.get('isEditable')!.value"
+          [formGroupName]="i"
+          class="selected-row"
+        >
           <td>
             <input type="text" formControlName="name" />
           </td>

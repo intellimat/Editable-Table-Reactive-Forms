@@ -28,7 +28,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
 
   departments = Object.values(Department);
   usersTable = this.formBuilder.group({
-    tableRows: this.formBuilder.array([]),
+    tableRows: this.formBuilder.array<EditableUser>([]),
   });
   tableRows = this.usersTable.get('tableRows') as FormArray;
   valuesBeforeEditing = new Map<number, EditableUser>();
@@ -42,7 +42,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (!this.data) return;
     this.usersTable = this.formBuilder.group({
-      tableRows: this.formBuilder.array([]),
+      tableRows: this.formBuilder.array<EditableUser>([]),
     });
     this.data.forEach((user) => {
       this.addRow(user);
