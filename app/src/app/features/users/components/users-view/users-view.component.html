@@ -14,7 +14,7 @@
         <img src="assets/icons/grid.svg" height="17px" alt="columns" />
       </button>
     </div>
-    <div>
+    <div *ngIf="view === 'grid'">
       <button class="add-row" (click)="onAddRowClick()">Add row</button>
     </div>
   </div>
