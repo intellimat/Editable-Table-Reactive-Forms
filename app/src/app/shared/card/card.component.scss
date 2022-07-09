@@ -7,11 +7,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 8px 0;
+    &:hover {
+      overflow: visible;
+      white-space: normal;
+      height: auto;
+    }
   }
   img {
     border-radius: 100%;
     width: 100px;
-    padding-top:10px
+    padding-top: 10px;
   }
 }
 

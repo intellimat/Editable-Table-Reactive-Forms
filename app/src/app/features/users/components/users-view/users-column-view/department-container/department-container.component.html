@@ -1,9 +1,15 @@
 <div class="title">
   <span>{{ title }}</span>
 </div>
+<input
+  class="search-bar"
+  type="text"
+  placeholder="Search"
+  [formControl]="search"
+/>
 <div class="cards-container">
   <app-card
-    *ngFor="let user of data"
+    *ngFor="let user of filteredData"
     img="assets/defaultAvatar.png"
     [title]="user.name"
     [subtitle]="user.email"

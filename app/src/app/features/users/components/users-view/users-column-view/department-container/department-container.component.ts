@@ -1,10 +1,5 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -15,12 +10,26 @@ import { User } from 'src/app/models/user.model';
 export class DepartmentContainerComponent implements OnInit, OnChanges {
   @Input() data!: User[];
   @Input() title?: string;
+  filteredData = this.data;
+  search: FormControl = new FormControl<string>('');
+
   constructor() {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.data);
-  }
 
   ngOnInit(): void {
-    console.log(this.data);
+    this.updateView();
+  }
+
+  ngOnChanges(): void {
+    this.filteredData = this.data.filter((user) =>
+      user.email.includes(this.search.getRawValue())
+    );
+  }
+
+  updateView() {
+    this.search.valueChanges.subscribe((searchWord) => {
+      this.filteredData = this.data.filter((user) =>
+        user.email.includes(searchWord)
+      );
+    });
   }
 }
