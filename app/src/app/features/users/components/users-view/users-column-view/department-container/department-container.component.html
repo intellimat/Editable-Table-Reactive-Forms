@@ -1,5 +1,7 @@
-<h3>{{ title }}</h3>
-<div class="card-container">
+<div class="title">
+  <span>{{ title }}</span>
+</div>
+<div class="cards-container">
   <app-card
     *ngFor="let user of data"
     img="assets/defaultAvatar.png"
