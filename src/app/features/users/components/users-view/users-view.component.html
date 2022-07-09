@@ -1,0 +1,38 @@
+<div class="outmost-container">
+  <div class="header">
+    <div class="switch-view">
+      <button
+        [ngClass]="view === 'column' ? 'active' : 'inactive'"
+        (click)="view = 'column'"
+      >
+        <img src="assets/icons/columns.svg" height="18px" alt="columns" />
+      </button>
+      <button
+        [ngClass]="view === 'grid' ? 'active' : 'inactive'"
+        (click)="view = 'grid'"
+      >
+        <img src="assets/icons/grid.svg" height="17px" alt="columns" />
+      </button>
+    </div>
+    <div *ngIf="view === 'grid'">
+      <button class="add-row" (click)="onAddRowClick()">Add row</button>
+    </div>
+  </div>
+  <app-users-table-view
+    *ngIf="view === 'grid'"
+    [data]="data$ | async"
+    [updateTableResponseEE]="updateTableResponseEE"
+    (tableEventEE)="handleTableEvent($event)"
+  ></app-users-table-view>
+  <app-users-column-view
+    *ngIf="view === 'column'"
+    [data]="data$ | async"
+  ></app-users-column-view>
+  <app-info-dialog
+    *ngIf="dialog.open"
+    [data]="dialog.data"
+    (changesSavedEE)="onChangesSaved($event)"
+    (removedRowEE)="onRemovedRow($event)"
+    (hideDialogEE)="onHideDialog()"
+  ></app-info-dialog>
+</div>
