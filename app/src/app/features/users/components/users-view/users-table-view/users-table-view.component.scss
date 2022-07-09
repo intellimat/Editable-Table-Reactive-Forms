@@ -1,0 +1,77 @@
+@import "../../../../../../styles/styles.scss";
+@mixin highlight-row {
+  background-color: $primary-grey;
+}
+
+@mixin highlight-input-border {
+  border-color: $primary-green;
+}
+
+table {
+  z-index: 1;
+  font-family: arial, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    border-right: 1px darkgrey solid;
+  }
+
+  td {
+    border-bottom: 1px darkgrey solid;
+  }
+
+  th {
+    background-color: $primary-dark-blue;
+    color: white;
+  }
+
+  tr {
+    height: 40px;
+    td:last-of-type {
+      display: flex;
+      justify-content: center;
+      height: 40px;
+    }
+
+    &:hover {
+      @include highlight-row;
+    }
+  }
+
+  .department-dropdown {
+    background: white;
+    border-width: 1px;
+    border-radius: 2px;
+  }
+
+  .action-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .selected-row {
+    @include highlight-row;
+  }
+
+  input,
+  select {
+    height: 26px;
+    outline-width: 0;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  input:focus,
+  select:focus {
+    @include highlight-input-border;
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,82 @@
+@import "../../../styles/styles.scss";
+.modal {
+  display: block;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  border-radius: 6px;
+  background-color: #fefefe;
+  margin: auto;
+  padding-top: 20px;
+  border: 1px solid #888;
+  width: 50%;
+
+  .fields-section,
+  .modal-title {
+    color: $medium-grey;
+    margin-left: 10px;
+  }
+
+  .modal-title {
+    padding: 20px 20px 0px 20px;
+    font-size: 20px;
+  }
+
+  .fields-section {
+    padding: 0 20px 20px 20px;
+  }
+
+  .bottom-section {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-top: 15px;
+    text-align: end;
+    background-color: #e9edef;
+    padding: 20px;
+    border-top: 1px solid;
+    border-color: #7e7d7d;
+  }
+
+  form p {
+    display: flex;
+    flex-direction: column;
+    input,
+    select {
+      height: 30px;
+      margin-top: 5px;
+      &:disabled {
+        background-color: rgb(230, 237, 243);
+        border: none;
+      }
+    }
+    label {
+      font-weight: bold;
+    }
+  }
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

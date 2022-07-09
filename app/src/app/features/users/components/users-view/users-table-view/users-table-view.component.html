@@ -1,0 +1,86 @@
+<form [formGroup]="usersTable">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <ng-container
+        formArrayName="tableRows"
+        *ngFor="let group of getFormControls.controls; let i = index"
+      >
+        <tr
+          *ngIf="group.get('isEditable')!.value"
+          [formGroupName]="i"
+          class="selected-row"
+        >
+          <td>
+            <input type="text" formControlName="name" />
+          </td>
+          <td>
+            <input type="text" formControlName="email" />
+          </td>
+          <td>
+            <select class="department-dropdown" formControlName="department">
+              <option [value]="group.get('department')!.value">
+                {{ group.get("department")!.value }}
+              </option>
+              <ng-container *ngFor="let d of departments">
+                <option *ngIf="d !== group.get('department')!.value">
+                  {{ d }}
+                </option>
+              </ng-container>
+            </select>
+          </td>
+          <td>
+            <button
+              class="action-button confirm-button"
+              (click)="onConfirmEdit(group, i)"
+            >
+              <img
+                src="assets/icons/check-mark.svg"
+                height="16px"
+                alt="confirm"
+              />
+            </button>
+            <button
+              class="action-button cancel-button"
+              (click)="onCancelClick(group, i)"
+            >
+              <img src="assets/icons/x-symbol.svg" height="16px" alt="cancel" />
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="!group.get('isEditable')!.value">
+          <td>
+            {{ group.get("name")!.value }}
+          </td>
+          <td>
+            {{ group.get("email")!.value }}
+          </td>
+          <td>
+            {{ group.get("department")!.value }}
+          </td>
+          <td>
+            <button class="action-button" (click)="onEditClick(group, i)">
+              <img
+                src="assets/icons/pencil-edit.svg"
+                height="16px"
+                alt="edit"
+              />
+            </button>
+            <button class="action-button" (click)="onDeleteClick(group, i)">
+              <img
+                src="assets/icons/delete-bin.svg"
+                height="16px"
+                alt="delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</form>
