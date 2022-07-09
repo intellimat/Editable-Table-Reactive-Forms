@@ -31,7 +31,7 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     tableRows: this.formBuilder.array([]),
   });
   tableRows = this.usersTable.get('tableRows') as FormArray;
-  valuesBeforeEditing = new Map<number, AbstractControl<any, any>>();
+  valuesBeforeEditing = new Map<number, EditableUser>();
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -40,14 +40,13 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.data) {
-      this.usersTable = this.formBuilder.group({
-        tableRows: this.formBuilder.array([]),
-      });
-      this.data.forEach((user) => {
-        this.addRow(user);
-      });
-    }
+    if (!this.data) return;
+    this.usersTable = this.formBuilder.group({
+      tableRows: this.formBuilder.array([]),
+    });
+    this.data.forEach((user) => {
+      this.addRow(user);
+    });
   }
 
   private createFormGroup(user: User): FormGroup {
@@ -71,16 +70,25 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     tableRows.removeAt(index);
   }
 
-  setUserIsEditable(group: AbstractControl<any, any>, value: boolean) {
+  setUserIsEditable(
+    group: AbstractControl<EditableUser, EditableUser>,
+    value: boolean
+  ) {
     group.get('isEditable')!.setValue(value);
   }
 
-  onEditClick(group: AbstractControl<any, any>, rowIndex: number) {
+  onEditClick(
+    group: AbstractControl<EditableUser, EditableUser>,
+    rowIndex: number
+  ) {
     this.valuesBeforeEditing.set(rowIndex, group.getRawValue());
     this.setUserIsEditable(group, true);
   }
 
-  onDeleteClick(group: AbstractControl<any, any>, rowIndex: number) {
+  onDeleteClick(
+    group: AbstractControl<EditableUser, EditableUser>,
+    rowIndex: number
+  ) {
     const user = group.value;
     const event: TableEvent = {
       user,
@@ -90,7 +98,10 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     this.tableEventEE.emit(event);
   }
 
-  onConfirmEdit(group: AbstractControl<any, any>, rowIndex: number) {
+  onConfirmEdit(
+    group: AbstractControl<EditableUser, EditableUser>,
+    rowIndex: number
+  ) {
     const user = group.value;
     const event: TableEvent = {
       user,
@@ -100,8 +111,12 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     this.tableEventEE.emit(event);
   }
 
-  onCancelClick(group: AbstractControl<any, any>, rowIndex: number) {
-    group.setValue(this.valuesBeforeEditing.get(rowIndex!));
+  onCancelClick(
+    group: AbstractControl<EditableUser, EditableUser>,
+    rowIndex: number
+  ) {
+    const previousRawValue = this.valuesBeforeEditing.get(rowIndex!);
+    group.setValue(previousRawValue!);
     this.valuesBeforeEditing.delete(rowIndex);
   }
 
@@ -142,4 +157,8 @@ export class UsersTableViewComponent implements OnInit, OnChanges {
     const control = this.usersTable.get('tableRows') as FormArray;
     return control;
   }
+}
+
+export interface EditableUser extends User {
+  isEditable: boolean;
 }
