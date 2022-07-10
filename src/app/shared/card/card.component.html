@@ -1,5 +1,16 @@
 <div class="card">
   <img [src]="img" alt="" />
+  <div
+    class="overlay-text-container"
+    [ngClass]="{
+      'green-bg': tag === 'experienced',
+      'purple-bg': tag === 'senior',
+      'blue-bg': tag === 'advanced',
+      'orange-bg': tag === 'expert'
+    }"
+  >
+    <span> {{ tag }}</span>
+  </div>
   <div class="container">
     <p>
       {{ title }}
