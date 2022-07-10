@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class DepartmentContainerComponent implements OnInit, OnChanges {
   @Input() data!: User[];
-  @Input() title?: string;
+  @Input() name?: string;
   filteredData = this.data;
   search: FormControl = new FormControl<string>('');
 
@@ -25,11 +25,24 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
     );
   }
 
-  updateView() {
+  private updateView() {
     this.search.valueChanges.subscribe((searchWord) => {
       this.filteredData = this.data.filter((user) =>
         user.email.includes(searchWord)
       );
     });
+  }
+
+  getTag(user: User): string {
+    const msInAday = 1000 * 60 * 60 * 24;
+    const currentDateInMS = Date.now();
+    const d = new Date(user.created!);
+    const createdTimeInMS = d.getTime();
+    const diffTime = currentDateInMS - createdTimeInMS;
+    if (diffTime <= msInAday) return 'experienced';
+    if (diffTime > msInAday && diffTime <= 2 * msInAday) return 'advanced';
+    if (diffTime > 2 * msInAday && diffTime <= 3 * msInAday) return 'senior';
+    if (diffTime > 3 * msInAday) return 'expert';
+    return '';
   }
 }
