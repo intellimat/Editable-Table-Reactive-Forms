@@ -20,15 +20,18 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.filteredData = this.data.filter((user) =>
-      user.email.includes(this.search.getRawValue())
+    this.filteredData = this.data.filter(
+      (user) =>
+        user.email.includes(this.search.getRawValue()) ||
+        user.name.includes(this.search.getRawValue())
     );
   }
 
   private updateView() {
     this.search.valueChanges.subscribe((searchWord) => {
-      this.filteredData = this.data.filter((user) =>
-        user.email.includes(searchWord)
+      this.filteredData = this.data.filter(
+        (user) =>
+          user.email.includes(searchWord) || user.name.includes(searchWord)
       );
     });
   }
@@ -36,12 +39,12 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
   getTag(user: User): string {
     const msInAday = 1000 * 60 * 60 * 24;
     const currentDateInMS = Date.now();
-    const d = new Date(user.created!);
-    const createdTimeInMS = d.getTime();
-    const diffTime = currentDateInMS - createdTimeInMS;
+    const createdDate = new Date(user.created!);
+    const createdDateInMS = createdDate.getTime();
+    const diffTime = currentDateInMS - createdDateInMS;
     if (diffTime <= msInAday) return 'experienced';
-    if (diffTime > msInAday && diffTime <= 2 * msInAday) return 'advanced';
-    if (diffTime > 2 * msInAday && diffTime <= 3 * msInAday) return 'senior';
+    if (diffTime <= 2 * msInAday) return 'advanced';
+    if (diffTime <= 3 * msInAday) return 'senior';
     if (diffTime > 3 * msInAday) return 'expert';
     return '';
   }

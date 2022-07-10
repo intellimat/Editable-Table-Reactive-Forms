@@ -9,6 +9,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 8px 0;
+    &:first-of-type {
+      text-transform: capitalize;
+    }
     &:hover {
       overflow: visible;
       white-space: normal;

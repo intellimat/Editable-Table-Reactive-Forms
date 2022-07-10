@@ -18,18 +18,18 @@ table {
   th {
     text-align: left;
     padding: 8px;
-    border-right: 1px darkgrey solid;
-  }
-
-  td {
-    height: 56px;
-    border-bottom: 1px darkgrey solid;
+    border-right: 0.5px darkgrey solid;
   }
 
   th {
+    overflow: hidden;
+    text-overflow: ellipsis;
     background-color: $primary-dark-blue;
     &:first-of-type {
-      border-left: 1px solid #2d4848;
+      border-left: 0.5px solid #2d4848;
+    }
+    &:last-of-type {
+      border-right: 0.5px #2d4848 solid;
     }
     color: white;
   }
@@ -37,15 +37,20 @@ table {
   tr {
     height: 56px;
     background-color: white;
-    td:last-of-type {
-      display: flex;
-      justify-content: center;
+    border-bottom: 0.5px darkgrey solid;
+    td {
       height: 56px;
-    }
-    td:first-of-type {
-      border-left: 1px solid darkgrey;
-    }
+      overflow: hidden;
+      text-overflow: ellipsis;
 
+      &:last-of-type {
+        display: flex;
+        justify-content: center;
+      }
+      &:first-of-type {
+        border-left: 0.5px solid darkgrey;
+      }
+    }
     &:hover {
       @include highlight-row;
     }
@@ -70,11 +75,12 @@ table {
   }
 
   input {
-    width: 100%;
+    width: 96%;
     height: 36px;
     outline-width: 0;
     border-style: solid;
     border-color: $medium-grey;
+    border-spacing: 0;
     border-width: 1px;
   }
 

@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   department: Department;
-  created?: string; // "2021-11-05T00:00:00"
+  created?: string; // format: '2022-07-10T22:56:28.951Z'
 }
 
 export enum Department {
