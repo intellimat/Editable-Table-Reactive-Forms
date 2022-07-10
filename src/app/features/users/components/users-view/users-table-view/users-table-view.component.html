@@ -54,9 +54,7 @@
           </td>
         </tr>
         <tr *ngIf="!group.get('isEditable')!.value">
-          <td>
-            {{ group.get("name")!.value }}
-          </td>
+          <td>{{ group.get("name")!.value | titlecase }}</td>
           <td>
             {{ group.get("email")!.value }}
           </td>
