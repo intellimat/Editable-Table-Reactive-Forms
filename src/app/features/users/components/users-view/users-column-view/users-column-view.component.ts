@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Department, User } from 'src/app/models/user.model';
 
 @Component({
@@ -30,16 +24,16 @@ export class UsersColumnViewComponent implements OnInit, OnChanges {
   }
 
   setUsersFromDevelopment() {
-    if (this.data)
-      this.usersFromDevelopment = this.data.filter(
-        (user) => user.department === Department.Development
-      );
+    if (!this.data) return;
+    this.usersFromDevelopment = this.data.filter(
+      (user) => user.department === Department.Development
+    );
   }
 
   setUsersFromMarketing() {
-    if (this.data)
-      this.usersFromMarketing = this.data.filter(
-        (user) => user.department === Department.Marketing
-      );
+    if (!this.data) return;
+    this.usersFromMarketing = this.data.filter(
+      (user) => user.department === Department.Marketing
+    );
   }
 }
