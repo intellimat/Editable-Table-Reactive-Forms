@@ -25,11 +25,6 @@ table {
     overflow: hidden;
     text-overflow: ellipsis;
     background-color: $primary-dark-blue;
-    &:hover {
-      overflow: visible;
-      white-space: normal;
-      height: auto;
-    }
     &:first-of-type {
       border-left: 0.5px solid #2d4848;
     }
@@ -47,11 +42,6 @@ table {
       height: 56px;
       overflow: hidden;
       text-overflow: ellipsis;
-      &:hover {
-        overflow: visible;
-        white-space: normal;
-        height: auto;
-      }
 
       &:last-of-type {
         display: flex;

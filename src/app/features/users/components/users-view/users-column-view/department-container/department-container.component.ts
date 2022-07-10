@@ -40,8 +40,8 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
     const createdTimeInMS = d.getTime();
     const diffTime = currentDateInMS - createdTimeInMS;
     if (diffTime <= msInAday) return 'experienced';
-    if (diffTime > msInAday && diffTime <= 2 * msInAday) return 'advanced';
-    if (diffTime > 2 * msInAday && diffTime <= 3 * msInAday) return 'senior';
+    if (diffTime <= 2 * msInAday) return 'advanced';
+    if (diffTime <= 3 * msInAday) return 'senior';
     if (diffTime > 3 * msInAday) return 'expert';
     return '';
   }
