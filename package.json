@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "plytix-fe-task",
   "version": "0.0.0",
   "engines": {
     "node": "16.x"
