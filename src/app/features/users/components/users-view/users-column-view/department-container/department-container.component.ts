@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class DepartmentContainerComponent implements OnInit, OnChanges {
   @Input() data!: User[];
-  @Input() title?: string;
+  @Input() name?: string;
   filteredData = this.data;
   search: FormControl = new FormControl<string>('');
 
