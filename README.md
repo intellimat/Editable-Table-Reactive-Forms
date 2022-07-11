@@ -6,22 +6,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Docker image
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You can find the docker image on https://hub.docker.com/repository/docker/intellimat/plytix-task, and run it locally with docker by 
+pulling it (_docker pull intellimat/plytix-task:latest_) and running it (_docker run -d -p 80:80 intellimat/plytix-task:latest_).
+You can now access it on localhost.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Key concepts
+#### Table view
+- _src\app\features\users\components\users-view\users-view.component.ts_ is the component that manages the logic between different views and performs API calls. Communication between parent and child components happen through the event emitters. The _src\app\features\users\components\users-view\users-table-view\users-table-view.component.ts_ emits an event (of type TableEvent) when the user performs an action. These events emitted by the table are then processed by the _user-view.component.ts_, and once the result of the API call is returned, the user-view.component.ts emits an event (of type UpdateTableResponse) to the child (i.e. users-table-view.component.ts) so that the table will be updated accordingly.
+- The implementation relies on the Angular Reactive Forms which provide great functionality and void rewriting the same code.
+#### Columns view (vista de miniaturas)
+- The seniority of the users (expert, experienced...) is calculated by transforming the user ISO string date into MS and then comparing it to the current date. 
+- The searchbar functionality makes use of .valuechanges() provided by the reactive FormGroup, so that we can filter whenever the user changes the value in the searchbar.
