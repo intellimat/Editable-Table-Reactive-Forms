@@ -18,4 +18,6 @@ You can now access it on localhost.
 - The implementation relies on the Angular Reactive Forms which provide great functionality and void rewriting the same code.
 #### Columns view (vista de miniaturas)
 - The seniority of the users (expert, experienced...) is calculated by transforming the user ISO string date into MS and then comparing it to the current date. 
-- The searchbar functionality makes use of .valuechanges() provided by the reactive FormGroup, so that we can filter whenever the user changes the value in the searchbar.
+- The search bar functionality makes use of .valuechanges() provided by the reactive FormGroup, so that we can filter whenever the user changes the value in the search bar.
+
+### Further note: please use Google Chrome to view the application. Specificity of the browsers was not take into account during this task.
