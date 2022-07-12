@@ -3,10 +3,6 @@
   background-color: $primary-grey;
 }
 
-@mixin highlight-input-border {
-  border-color: $primary-green;
-}
-
 table {
   z-index: 1;
   font-family: arial, sans-serif;
@@ -70,6 +66,12 @@ table {
     margin-right: 4px;
   }
 
+  .confirm-button {
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
   .selected-row {
     @include highlight-row;
   }
@@ -96,7 +98,22 @@ table {
 
   input:focus,
   select:focus {
-    @include highlight-input-border;
     border-width: 2px;
+  }
+
+  input.valid-field-border {
+    border-color: $primary-green;
+  }
+
+  input.invalid-field-border {
+    border-color: $primary-red;
+  }
+
+  select.valid-field-border {
+    border-color: $primary-green;
+  }
+
+  select.invalid-field-border {
+    border-color: $primary-red;
   }
 }
