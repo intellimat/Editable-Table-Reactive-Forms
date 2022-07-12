@@ -17,13 +17,37 @@
           class="selected-row"
         >
           <td>
-            <input type="text" formControlName="name" />
+            <input
+              [ngClass]="
+                group.get('name')!.valid
+                  ? 'valid-field-border'
+                  : 'invalid-field-border'
+              "
+              type="text"
+              formControlName="name"
+            />
           </td>
           <td>
-            <input type="text" formControlName="email" />
+            <input
+              [ngClass]="
+                group.get('email')!.valid
+                  ? 'valid-field-border'
+                  : 'invalid-field-border'
+              "
+              type="text"
+              formControlName="email"
+            />
           </td>
           <td>
-            <select class="department-dropdown" formControlName="department">
+            <select
+              class="department-dropdown"
+              [ngClass]="
+                group.get('department')!.valid
+                  ? 'valid-field-border'
+                  : 'invalid-field-border'
+              "
+              formControlName="department"
+            >
               <option [value]="group.get('department')!.value">
                 {{ group.get("department")!.value }}
               </option>
@@ -37,10 +61,18 @@
           <td>
             <button
               class="action-button confirm-button"
+              [disabled]="!group.valid"
               (click)="onConfirmEdit(group, i)"
             >
               <img
+                *ngIf="group.valid"
                 src="assets/icons/check-mark.svg"
+                height="16px"
+                alt="confirm"
+              />
+              <img
+                *ngIf="!group.valid"
+                src="assets/icons/check-mark-disabled.svg"
                 height="16px"
                 alt="confirm"
               />
