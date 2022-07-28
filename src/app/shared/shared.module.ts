@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './card/card.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
-  declarations: [InfoDialogComponent, CardComponent],
+  declarations: [InfoDialogComponent, CardComponent, LoadingSpinnerComponent],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [InfoDialogComponent, CardComponent],
+  exports: [InfoDialogComponent, CardComponent, LoadingSpinnerComponent],
 })
 export class SharedModule {}
