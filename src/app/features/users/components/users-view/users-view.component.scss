@@ -2,6 +2,9 @@
 
 .outmost-container {
   padding: 1rem 3rem 3rem 3rem;
+  app-loading-spinner {
+    padding-top: 200px;
+  }
 
   .switch-view {
     button {
