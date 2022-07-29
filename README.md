@@ -8,8 +8,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Docker image
 
-You can find the docker image on https://hub.docker.com/repository/docker/intellimat/plytix-task, and run it locally with docker by 
-pulling it (_docker pull intellimat/plytix-task:latest_) and running it (_docker run -d -p 80:80 intellimat/plytix-task:latest_).
+You can find the docker image on https://hub.docker.com/repository/docker/intellimat/editable-users-table-frontend, and run it locally with docker by 
+pulling it (_docker pull intellimat/editable-users-table-frontend:latest_) and running it (_docker run -d -p 80:80 intellimat/editable-users-table-frontend:latest_).
 You can now access it on localhost.
 
 ## Key concepts
