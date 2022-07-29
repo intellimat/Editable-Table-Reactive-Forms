@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { filter, map } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -11,7 +12,7 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
   @Input() data!: User[];
   @Input() name?: string;
   filteredData = this.data;
-  search: FormControl = new FormControl<string>('');
+  search = new FormControl<string>('');
 
   constructor() {}
 
@@ -20,20 +21,29 @@ export class DepartmentContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.filteredData = this.data.filter(
-      (user) =>
-        user.email.includes(this.search.getRawValue()) ||
-        user.name.includes(this.search.getRawValue())
-    );
+    const searchValue = this.search.getRawValue();
+    if (searchValue !== null)
+      this.filteredData = this.data.filter(
+        (user) =>
+          user.email.toLowerCase().includes(searchValue) ||
+          user.name.toLowerCase().includes(searchValue)
+      );
   }
 
   private updateView() {
-    this.search.valueChanges.subscribe((searchWord) => {
-      this.filteredData = this.data.filter(
-        (user) =>
-          user.email.includes(searchWord) || user.name.includes(searchWord)
-      );
-    });
+    this.search.valueChanges
+      .pipe(
+        filter((searchWord) => searchWord !== null),
+        map((searchWord) => searchWord as string),
+        map((searchWord: string) => searchWord.toLowerCase())
+      )
+      .subscribe((searchWord) => {
+        this.filteredData = this.data.filter(
+          (user) =>
+            user.email.toLowerCase().includes(searchWord) ||
+            user.name.toLowerCase().includes(searchWord)
+        );
+      });
   }
 
   getTag(user: User): string {

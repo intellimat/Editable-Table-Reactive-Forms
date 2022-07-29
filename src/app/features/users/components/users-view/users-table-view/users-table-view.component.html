@@ -51,9 +51,9 @@
               <option [value]="group.get('department')!.value">
                 {{ group.get("department")!.value }}
               </option>
-              <ng-container *ngFor="let d of departments">
-                <option *ngIf="d !== group.get('department')!.value">
-                  {{ d }}
+              <ng-container *ngFor="let department of departments">
+                <option *ngIf="department !== group.get('department')!.value">
+                  {{ department }}
                 </option>
               </ng-container>
             </select>
@@ -97,14 +97,14 @@
             <button class="action-button" (click)="onEditClick(group, i)">
               <img
                 src="assets/icons/pencil-edit.svg"
-                height="16px"
+                height="19px"
                 alt="edit"
               />
             </button>
             <button class="action-button" (click)="onDeleteClick(group, i)">
               <img
                 src="assets/icons/delete-bin.svg"
-                height="16px"
+                height="19px"
                 alt="delete"
               />
             </button>

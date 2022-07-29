@@ -6,7 +6,7 @@ import { Department, User } from 'src/app/models/user.model';
   templateUrl: './users-column-view.component.html',
   styleUrls: ['./users-column-view.component.scss'],
 })
-export class UsersColumnViewComponent implements OnInit, OnChanges {
+export class UsersColumnViewComponent implements OnChanges {
   @Input() data: User[] | null = null;
   usersFromMarketing: User[] = [];
   usersFromDevelopment: User[] = [];
@@ -14,11 +14,6 @@ export class UsersColumnViewComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnChanges(): void {
-    this.setUsersFromDevelopment();
-    this.setUsersFromMarketing();
-  }
-
-  ngOnInit(): void {
     this.setUsersFromDevelopment();
     this.setUsersFromMarketing();
   }
