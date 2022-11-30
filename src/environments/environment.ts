@@ -3,5 +3,5 @@ export const apiBaseUrl =
 export const userUrl = '/users';
 
 export const environment = {
-  production: true,
+  production: false,
 };
