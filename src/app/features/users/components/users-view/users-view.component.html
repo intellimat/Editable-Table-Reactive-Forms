@@ -1,6 +1,5 @@
 <div class="outmost-container">
-  <app-loading-spinner *ngIf="!(data$ | async)"></app-loading-spinner>
-  <ng-container *ngIf="data$ | async as data">
+  <ng-container *ngIf="data$ | async as data" else #loading>
     <div class="header">
       <div class="switch-view">
         <button
@@ -38,4 +37,7 @@
       (hideDialogEE)="onHideDialog()"
     ></app-info-dialog>
   </ng-container>
+  <ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
 </div>
