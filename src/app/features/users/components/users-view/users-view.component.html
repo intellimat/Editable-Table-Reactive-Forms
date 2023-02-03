@@ -25,10 +25,10 @@
       [updateTableResponseEE]="updateTableResponseEE"
       (tableEventEE)="handleTableEvent($event)"
     ></app-users-table-view>
-    <app-users-column-view
+    <app-users-card-view
       *ngIf="view === 'column'"
       [data]="data"
-    ></app-users-column-view>
+    ></app-users-card-view>
     <app-info-dialog
       *ngIf="dialog.open"
       [data]="dialog.data"

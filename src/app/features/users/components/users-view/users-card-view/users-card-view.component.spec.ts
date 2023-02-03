@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DepartmentContainerComponent } from './department-container/department-container.component';
-import { UsersColumnViewComponent } from './users-column-view.component';
+import { UsersCardViewComponent } from './users-card-view.component';
 
-describe('UsersColumnViewComponent', () => {
-  let component: UsersColumnViewComponent;
-  let fixture: ComponentFixture<UsersColumnViewComponent>;
+describe('UsersCardViewComponent', () => {
+  let component: UsersCardViewComponent;
+  let fixture: ComponentFixture<UsersCardViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UsersColumnViewComponent, DepartmentContainerComponent],
+      declarations: [UsersCardViewComponent, DepartmentContainerComponent],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsersColumnViewComponent);
+    fixture = TestBed.createComponent(UsersCardViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
