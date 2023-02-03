@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DepartmentContainerComponent } from './department-container/department-container.component';
 import { UsersCardViewComponent } from './users-card-view.component';
 
 describe('UsersCardViewComponent', () => {
@@ -9,7 +8,7 @@ describe('UsersCardViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UsersCardViewComponent, DepartmentContainerComponent],
+      declarations: [UsersCardViewComponent],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
