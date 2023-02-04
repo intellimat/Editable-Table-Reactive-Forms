@@ -1,10 +1,6 @@
 {
   "name": "editable-table-reactive-forms",
   "version": "0.0.0",
-  "engines": {
-    "node": "16.17.0",
-    "npm": "8.3.1"
-  },
   "scripts": {
     "ng": "ng",
     "start-frontend": "ng serve",
